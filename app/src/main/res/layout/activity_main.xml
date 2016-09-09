@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.autobanner.MainActivity">
+
+    <RelativeLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="160dp">
+
+    </RelativeLayout>
+
+    <com.autoscrollbanner.AutoScrollBanner
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:layout_alignParentBottom="true"
+        app:content_margin="2dp"
+        app:load_fail="@drawable/indicator_default"
+        app:load_ing="@drawable/indicator_select"
+        app:point_margin="5dp"
+        app:point_selector="@drawable/point_selecor"
+        app:point_size="5dp"
+        app:rel_bg="#5099FF99"
+        app:rel_height="20dp"
+        app:rel_layout="TEXT_LEFT_POINT_RIGHT"
+        app:scroll_timer="1"
+        app:title_text_color="#FF9900"
+        app:title_text_size="11sp" />
+</RelativeLayout>

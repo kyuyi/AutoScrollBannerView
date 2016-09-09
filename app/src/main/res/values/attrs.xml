@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="auto_banner">
+        <!--title的颜色-->
+        <attr name="title_text_color" format="color" />
+        <attr name="title_text_size" format="integer" />
+        <!--标题栏的背景颜色-->
+        <attr name="rel_bg" format="color" />
+        <!--标题栏的高度-->
+        <attr name="rel_height" format="dimension" />
+        <!--indicator的选中样式-->
+        <attr name="point_select" format="integer" />
+        <!--indicator未选中的样式-->
+        <attr name="point_default" format="integer" />
+        <!--标题栏的布局方式-->
+        <attr name="rel_layout">
+            <!--没有文字只有indicator 并且indicator在中间-->
+            <enum name="CENTERT" value="0" />
+            <!--文字在左边indicator在右边-->
+            <enum name="TEXT_LEFT_POINT_RIGHT" value="1" />
+            <!--文字在右边，indicator在左边-->
+            <enum name="TEXT_RIGHT_POINT_LEFT" value="2" />
+        </attr>
+    </declare-styleable>
+</resources>

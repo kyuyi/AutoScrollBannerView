@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * this activity will tell you how to use this view,if you like this library place click star
+ * 这个Activity作为一个演示的Activity ,在这个Acitivty 中你将学会如何使用这个依赖包
  */
 public class MainActivity extends AppCompatActivity {
     private AutoScrollBanner banner;

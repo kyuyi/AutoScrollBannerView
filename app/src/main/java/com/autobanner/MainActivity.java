@@ -10,6 +10,9 @@ import com.autoscrollbanner.AutoScrollBanner;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * this activity will tell you how to use this view,if you like this library place click star
+ */
 public class MainActivity extends AppCompatActivity {
     private AutoScrollBanner banner;
     private RelativeLayout container;

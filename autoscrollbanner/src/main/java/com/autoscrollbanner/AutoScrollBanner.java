@@ -162,16 +162,16 @@ public class AutoScrollBanner extends RelativeLayout {
         load_fail = mTa.getResourceId(R.styleable.auto_banner_load_fail, load_fail);//图片加载失败时的占位图片
         load_ing = mTa.getResourceId(R.styleable.auto_banner_load_ing, load_ing);
         content_margin = mTa.getDimensionPixelSize(R.styleable.auto_banner_content_margin, content_margin);
-        Log.e("TOG", title_text_color + "--"
-                + title_text_size + "--"
-                + rl_bg + "--"
-                + rl_height + "--"
-                + point_size + "--"
-                + point_margin + "--"
-                + rel_layout + "--"
-                + point_selector + "--"
-                + scroll_timer + "--"
-                + load_fail);
+//        Log.e("TOG", title_text_color + "--"
+//                + title_text_size + "--"
+//                + rl_bg + "--"
+//                + rl_height + "--"
+//                + point_size + "--"
+//                + point_margin + "--"
+//                + rel_layout + "--"
+//                + point_selector + "--"
+//                + scroll_timer + "--"
+//                + load_fail);
     }
 
     private List<SimpleDraweeView> bannerImgList = new ArrayList<>();

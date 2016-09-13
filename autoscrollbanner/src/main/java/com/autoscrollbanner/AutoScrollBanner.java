@@ -191,14 +191,16 @@ public class AutoScrollBanner extends RelativeLayout {
             bannerImg.setHierarchy(hierarchy);
             bannerImg.setScaleType(ImageView.ScaleType.FIT_CENTER);
             bannerImg.setImageURI(mlist.get(i));
-            if (mEvents != null) {
-                bannerImg.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+//
+            bannerImg.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mEvents != null) {
                         mEvents.onBannerItemClick(bannerPager.getCurrentItem() % mlist.size());
                     }
-                });
-            }
+
+                }
+            });
             bannerImgList.add(bannerImg);
             //动态创建RadioButton  该控件作为indicator
             RadioButton bannerRB = new RadioButton(con);
@@ -493,6 +495,7 @@ public class AutoScrollBanner extends RelativeLayout {
 
         /**
          * 实例化控件
+         *
          * @return AutoScrollBanner对象
          */
         public AutoScrollBanner Builder() {

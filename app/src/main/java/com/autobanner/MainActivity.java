@@ -63,6 +63,12 @@ public class MainActivity extends AppCompatActivity {
                 .setPointSize(5)
                 .setTitleSize(11)
                 .Builder();
+        mbanner.setOnBannerItemClick(new AutoScrollBanner.OnBannerItemClick() {
+            @Override
+            public void onBannerItemClick(int position) {
+                Toast.makeText(MainActivity.this, position + "---", Toast.LENGTH_SHORT).show();
+            }
+        });
         container.addView(mbanner);
 
     }

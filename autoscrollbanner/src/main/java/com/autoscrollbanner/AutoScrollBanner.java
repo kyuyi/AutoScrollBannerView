@@ -5,7 +5,6 @@ import android.content.res.TypedArray;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -134,16 +133,16 @@ public class AutoScrollBanner extends RelativeLayout {
         rl_height = BannerUtils.dp2px(con, rl_height);
         title_text_size = BannerUtils.dp2px(con, title_text_size);
         content_margin = BannerUtils.dp2px(con, content_margin);
-        Log.e("TAG", title_text_color + "--"
-                + title_text_size + "--"
-                + rl_bg + "--"
-                + rl_height + "--"
-                + point_size + "--"
-                + point_margin + "--"
-                + rel_layout + "--"
-                + point_selector + "--"
-                + scroll_timer + "--"
-                + load_fail);
+//        Log.e("TAG", title_text_color + "--"
+//                + title_text_size + "--"
+//                + rl_bg + "--"
+//                + rl_height + "--"
+//                + point_size + "--"
+//                + point_margin + "--"
+//                + rel_layout + "--"
+//                + point_selector + "--"
+//                + scroll_timer + "--"
+//                + load_fail);
         initLayout();
     }
 
@@ -465,7 +464,7 @@ public class AutoScrollBanner extends RelativeLayout {
          * @param resource 站位图片的资源ID
          * @return Build 对象
          */
-        public Build setLoadingl(@Nullable int resource) {
+        public Build setLoading(@Nullable int resource) {
             this.load_ing = resource;
             return this;
         }

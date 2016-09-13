@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                 .setBannerTitle(title)
                 .setBannerUrl(url)
                 .setLoadFail(R.drawable.url_default)
-                .setLoadingl(R.drawable.url_default)
+                .setLoading(R.drawable.url_default)
                 .setPointMargin(5)
                 .setPointSelector(R.drawable.point_selecor2)
                 .setRelColor(getResources().getColor(R.color.colorAccent))

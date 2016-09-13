@@ -51,3 +51,6 @@ AutoScrollBannerView 是一种利用ViewPager+RadioGroup组合而成的自定义
                 .setTitleSize(11)                                              //标题栏标题字体大小 单位：SP
                 .Builder();                                                    //开始构建
         container.addView(mbanner);                                            //向页面中添加该控件
+        
+### 更多：
+    其他更多详细内容请查看源码

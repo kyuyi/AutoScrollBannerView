@@ -5,6 +5,7 @@ AutoScrollBannerView 是一种利用ViewPager+RadioGroup组合而成的自定义
 ### 效果：
 <img src="https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"/>
 ### 如何使用：
+#### 目前只支持Gradle方式，配置方式如下：
 	dependencies {
 	    compile 'com.github.kyuyi:AutoScrollBannerView:v160913_12.06.29'
 	}
@@ -33,3 +34,20 @@ AutoScrollBannerView 是一种利用ViewPager+RadioGroup组合而成的自定义
 <tr><td>app:title_text_color</td><td>标题栏中标题的字体颜色</td><td>app:title_text_color="@color/color_FFFFFF"</td><td>R.color.color_333333</td></tr>
 <tr><td>app:title_text_size</td><td>标题栏中标题的大小</td><td>app:title_text_size="11sp"</td><td>16SP</td></tr>
 </Table>
+#### Builder模式设置方法说明：
+        AutoScrollBanner mbanner = new AutoScrollBanner.Build(this)            //实例化对象
+                .setBannerTitle(title)                                         //设置轮播图的标题
+                .setBannerUrl(url)                                             //设置轮播图的URL
+                .setLoadFail(R.drawable.url_default)                           //设置轮播图加载失败的占位图片
+                .setLoading(R.drawable.url_default)                            //设置轮播图正在加载的占位图片
+                .setPointMargin(5)                                             //设置指示器的大小 单位：DP
+                .setPointSelector(R.drawable.point_selecor2)                   //设置指示器的样式Selector
+                .setRelColor(getResources().getColor(R.color.colorAccent))     //设置标题栏的背景颜色
+                .setRelHeight(28)                                              //设置标题栏的高度 单位:DP
+                .setTitleColor(getResources().getColor(R.color.color_333333))  //设置标题栏的字体颜色
+                .setRelLayout(2)                                               //设置标题栏的布局方式
+                .setScrollTimer(1)                                             //设置滚动的时间间隔 单位：s
+                .setPointSize(5)                                               //设置指示器的大小 单位：DP
+                .setTitleSize(11)                                              //标题栏标题字体大小 单位：SP
+                .Builder();                                                    //开始构建
+        container.addView(mbanner);                                            //向页面中添加该控件

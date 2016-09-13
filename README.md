@@ -26,7 +26,7 @@ AutoScrollBannerView 是一种利用ViewPager+RadioGroup组合而成的自定义
 <tr><td> app:load_fail</td><td>图片加载失败后的占位图</td><td>资源ID</td><td>app:load_fail="@drawable/indicator_default"</td><td>R.drawable.fail</td></tr>
 <tr><td> app:load_ing</td><td>图片正在加载的占位图</td><td>资源ID</td><td>app:load_ing="@drawable/indicator_select"</td><td>R.drawable.fail</td></tr>
 <tr><td> app:point_margin</td><td>指示器之间的间隔</td><td>int</td><td> app:point_margin="5dp"</td><td>3(DP)</td></tr>
-<tr><td>app:point_selector</td><td>指示器的样式Selector</td><td>资源ID</td><td>app:point_selector="@drawable/point_selecor"</td><td>R.drawable.point_selecor</td><td></td></tr>
+<tr><td>app:point_selector</td><td>指示器的样式Selector</td><td>资源ID</td><td>app:point_selector="@drawable/point_selecor"</td><td>R.drawable.point_selecor</td></tr>
 <tr><td>app:point_sizen</td><td>指示器的大小</td><td>int</td><td>app:point_size="5dp"</td><td>10(DP)</td></tr>
 <tr><td>app:rel_bg</td><td>标题栏的背景颜色</td><td>资源ID</td><td>app:rel_bg="@color/color_666666"</td><td>R.color.color_30e5e5e5</td></tr>
 <tr><td>app:rel_height</td><td>标题栏高度</td><td>资源ID</td><td>app:rel_height="20dp"</td><td>25(DP)</td></tr>

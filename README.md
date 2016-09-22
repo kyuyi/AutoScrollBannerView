@@ -54,3 +54,6 @@ AutoScrollBannerView 是一种利用ViewPager+RadioGroup组合而成的自定义
         
 ### 更多：
     其他更多详细内容请查看源码
+### 注意事项：
+    由于该控件中的图片加载使用的是Fresco 为了防止 依赖包冲突，请在使用过程中尽量避免其他的库中依赖fresco
+    

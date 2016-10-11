@@ -7,7 +7,7 @@ AutoScrollBannerView 是一种利用ViewPager+RadioGroup组合而成的自定义
 ### 如何使用：
 #### 目前只支持Gradle方式，配置方式如下：
 	dependencies {
-	    compile 'com.github.kyuyi:AutoScrollBannerView:v160913_12.06.29'
+	    compile 'com.github.kyuyi:AutoScrollBannerView:v161011_15.40.41'
 	}
 	
 	

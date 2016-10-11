@@ -28,7 +28,7 @@ public class BannerPager extends ViewPager {
         this.bannerRG = indicator;
         this.pagerSize = size;
         mhandler = new Handler();
-        mhandler.postDelayed(runnable, timer * 1000);
+//        mhandler.postDelayed(runnable, timer * 1000);
     }
 
     @Override
@@ -48,7 +48,6 @@ public class BannerPager extends ViewPager {
 
     }
 
-
     Runnable runnable = new Runnable() {
         @Override
         public void run() {
@@ -59,4 +58,11 @@ public class BannerPager extends ViewPager {
         }
     };
 
+    public void stop() {
+        mhandler.removeCallbacks(runnable);
+    }
+
+    public void start() {
+        mhandler.postDelayed(runnable, timer * 1000);
+    }
 }

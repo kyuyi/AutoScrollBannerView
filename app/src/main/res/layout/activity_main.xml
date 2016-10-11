@@ -6,21 +6,11 @@
     android:layout_height="match_parent"
     tools:context="com.autobanner.MainActivity">
 
-    <RelativeLayout
-        android:id="@+id/container"
-        android:layout_width="match_parent"
-        android:layout_height="160dp">
-
-    </RelativeLayout>
-
     <com.autoscrollbanner.AutoScrollBanner
         android:id="@+id/banner"
         android:layout_width="match_parent"
         android:layout_height="160dp"
-        android:layout_alignParentBottom="true"
         app:content_margin="2dp"
-        app:load_fail="@drawable/indicator_default"
-        app:load_ing="@drawable/indicator_select"
         app:point_margin="5dp"
         app:point_selector="@drawable/point_selecor"
         app:point_size="5dp"

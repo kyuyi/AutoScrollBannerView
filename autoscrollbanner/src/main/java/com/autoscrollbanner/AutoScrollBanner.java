@@ -2,7 +2,6 @@ package com.autoscrollbanner;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.View;
@@ -76,11 +75,15 @@ public class AutoScrollBanner extends RelativeLayout {
     /**
      * 图片URL的集合
      */
-    List<String> mlist;
+    private List<String> mlist;
     /**
      * 标题集合
      */
-    List<String> bannerTitleList;
+    private List<String> bannerTitleList;
+    /**
+     * 存放视图的集合
+     */
+    private List<SimpleDraweeView> bannerImgList;
     /**
      * 标题文字文本控件
      */
@@ -97,6 +100,14 @@ public class AutoScrollBanner extends RelativeLayout {
      * banner的点击事件
      */
     private OnBannerItemClick mEvents;
+    /**
+     * 是否初始化控件
+     */
+    private boolean isInit = true;
+    /**
+     * 自定义pager对象
+     */
+    private BannerPager bannerPager;
 
     public AutoScrollBanner(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -109,42 +120,8 @@ public class AutoScrollBanner extends RelativeLayout {
         content_margin = BannerUtils.dp2px(con, content_margin);
         mlist = new ArrayList<>();
         initTypedArray(attrs);
-//        initLayout();
     }
 
-    public AutoScrollBanner(Context con, Build mBuild) {
-        super(con);
-        this.con = con;
-        this.title_text_color = mBuild.title_text_color;
-        this.title_text_size = mBuild.title_text_size;
-        this.rl_bg = mBuild.rl_bg;
-        this.rl_height = mBuild.rl_height;
-        this.point_size = mBuild.point_size;
-        this.point_margin = mBuild.point_margin;
-        this.rel_layout = mBuild.rel_layout;
-        this.point_selector = mBuild.point_selector;
-        this.scroll_timer = mBuild.scroll_timer;
-        this.load_fail = mBuild.load_fail;
-        this.load_ing = mBuild.load_ing;
-        this.mlist = mBuild.mlist;
-        this.bannerTitleList = mBuild.bannerTitleList;
-        point_margin = BannerUtils.dp2px(con, point_margin);
-        point_size = BannerUtils.dp2px(con, point_size);
-        rl_height = BannerUtils.dp2px(con, rl_height);
-        title_text_size = BannerUtils.dp2px(con, title_text_size);
-        content_margin = BannerUtils.dp2px(con, content_margin);
-//        Log.e("TAG", title_text_color + "--"
-//                + title_text_size + "--"
-//                + rl_bg + "--"
-//                + rl_height + "--"
-//                + point_size + "--"
-//                + point_margin + "--"
-//                + rel_layout + "--"
-//                + point_selector + "--"
-//                + scroll_timer + "--"
-//                + load_fail);
-        initLayout();
-    }
 
     public void initTypedArray(AttributeSet attrs) {
 
@@ -161,12 +138,14 @@ public class AutoScrollBanner extends RelativeLayout {
         load_fail = mTa.getResourceId(R.styleable.auto_banner_load_fail, load_fail);//图片加载失败时的占位图片
         load_ing = mTa.getResourceId(R.styleable.auto_banner_load_ing, load_ing);
         content_margin = mTa.getDimensionPixelSize(R.styleable.auto_banner_content_margin, content_margin);
+        mTa.recycle();
 
     }
 
-    private List<SimpleDraweeView> bannerImgList = new ArrayList<>();
 
     public void initLayout() {
+        isInit = false;
+        bannerImgList = new ArrayList<>();
         //创建标题栏的Rel并设置属性
         RelativeLayout bannerTitleRel = new RelativeLayout(con);
         LayoutParams bannerTitleRelParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, rl_height);//标题栏的宽高
@@ -175,10 +154,10 @@ public class AutoScrollBanner extends RelativeLayout {
         bannerTitleRel.setLayoutParams(bannerTitleRelParams);
         //创建指示器
         bannerRG = new RadioGroup(con);
-        RelativeLayout.LayoutParams bannerRGParams = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        LayoutParams bannerRGParams = new LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         bannerRG.setOrientation(LinearLayout.HORIZONTAL);
         //动态创建ViewPager并设置属性
-        final ViewPager bannerPager = new BannerPager(con, scroll_timer, bannerRG, mlist.size());
+        bannerPager = new BannerPager(con, scroll_timer, bannerRG, mlist.size());
         LayoutParams bannerPagerParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         bannerPager.setLayoutParams(bannerPagerParams);
         for (int i = 0; i < mlist.size(); i++) {
@@ -268,6 +247,7 @@ public class AutoScrollBanner extends RelativeLayout {
             public void onPageSelected(int position) {
                 int currentPostion = position % mlist.size();
                 ((RadioButton) bannerRG.getChildAt(currentPostion)).setChecked(true);
+                //如果布局是带有标题的模式则设置文字
                 if (rel_layout == 1 || rel_layout == 2) {
                     titleText.setText(bannerTitleList.get(currentPostion));
                 }
@@ -291,11 +271,6 @@ public class AutoScrollBanner extends RelativeLayout {
      */
     public void setUrls(List<String> mlist) {
         this.mlist = mlist;
-        if (isInstance) {
-            isInstance = false;
-        } else {
-            initLayout();
-        }
     }
 
     /**
@@ -303,11 +278,19 @@ public class AutoScrollBanner extends RelativeLayout {
      */
     public void setTitles(List<String> mlist) {
         this.bannerTitleList = mlist;
-        if (isInstance) {
-            isInstance = false;
-        } else {
+    }
+
+    /**
+     * 开始轮播
+     */
+    public void start() {
+        if(isInit)
             initLayout();
-        }
+        bannerPager.start();
+    }
+
+    public void stop() {
+        bannerPager.stop(); //停止循环轮播
     }
 
     public interface OnBannerItemClick {
@@ -316,190 +299,5 @@ public class AutoScrollBanner extends RelativeLayout {
 
     public void setOnBannerItemClick(OnBannerItemClick events) {
         this.mEvents = events;
-    }
-
-
-    /**
-     * 动态创建的方式
-     */
-
-    public static class Build {
-
-        private float title_text_size = 16f;
-        private Context context;
-        private int title_text_color;
-        private int rl_bg;
-        private int rl_height = 25;
-        private int point_size = 10;
-        private int point_margin = 3;
-        private int rel_layout = 0;
-        private int point_selector = R.drawable.point_selecor;
-        private int scroll_timer = 3;
-        private int load_fail = R.drawable.fail;
-        private int load_ing = R.drawable.loadding;
-        private List<String> mlist;
-        private List<String> bannerTitleList;
-
-        /**
-         * @param con 上下文对象
-         */
-        public Build(Context con) {
-            this.context = con;
-            //初始化默认值
-            title_text_color = context.getResources().getColor(R.color.color_333333);
-            rl_bg = context.getResources().getColor(R.color.color_30e5e5e5);
-        }
-
-        /**
-         * 设置标题文本的颜色
-         *
-         * @param color 文本的颜色
-         * @return Build对象
-         */
-        public Build setTitleColor(@Nullable int color) {
-            this.title_text_color = color;
-            return this;
-        }
-
-        /**
-         * 设置标题文本的字体大小
-         *
-         * @param size 文本字体的大小
-         * @return Build对象
-         */
-        public Build setTitleSize(@Nullable float size) {
-            this.title_text_size = size;
-            return this;
-        }
-
-        /**
-         * 设置标题栏的背景颜色
-         *
-         * @param color 标题栏的背景颜色
-         * @return Build对象
-         */
-        public Build setRelColor(@Nullable int color) {
-            this.rl_bg = color;
-            return this;
-        }
-
-        /**
-         * 设置标题栏的高度
-         *
-         * @param height 标题栏的高度
-         * @return Build对象
-         */
-        public Build setRelHeight(@Nullable int height) {
-            this.rl_height = height;
-            return this;
-        }
-
-        /**
-         * 设置指示器的大小（宽高）
-         *
-         * @param size 指示器的大小（宽高）
-         * @return Build对象
-         */
-        public Build setPointSize(@Nullable int size) {
-            this.point_size = size;
-            return this;
-        }
-
-        /**
-         * 设置指示器之间的间隔
-         *
-         * @param margin 指示器之间的间隔
-         * @return Build对象
-         */
-        public Build setPointMargin(@Nullable int margin) {
-            this.point_margin = margin;
-            return this;
-        }
-
-        /**
-         * 设置标题栏的布局方式
-         *
-         * @param way 布局方式
-         * @return Build对象
-         */
-        public Build setRelLayout(@Nullable int way) {
-            this.rel_layout = way;
-            return this;
-        }
-
-        /**
-         * 设置自定义的Indicator 资源文件
-         *
-         * @param selector indicator资源ID
-         * @return Build对象
-         */
-        public Build setPointSelector(@Nullable int selector) {
-            this.point_selector = selector;
-            return this;
-        }
-
-        /**
-         * 设置自动滚动的时间间隔
-         *
-         * @param timer 滚动的时间间隔
-         * @return Build对象
-         */
-        public Build setScrollTimer(@Nullable int timer) {
-            this.scroll_timer = timer;
-            return this;
-        }
-
-        /**
-         * 设置图片加载失败的 站位图片
-         *
-         * @param resource 占位图片的资源ID
-         * @return Build对象
-         */
-        public Build setLoadFail(@Nullable int resource) {
-            this.load_fail = resource;
-            return this;
-        }
-
-        /**
-         * 设置正在加载时的站位图片
-         *
-         * @param resource 站位图片的资源ID
-         * @return Build 对象
-         */
-        public Build setLoading(@Nullable int resource) {
-            this.load_ing = resource;
-            return this;
-        }
-
-        /**
-         * 设置图片的路径
-         *
-         * @param list 图片的路径集合
-         * @return Build对象
-         */
-        public Build setBannerUrl(@Nullable List<String> list) {
-            this.mlist = list;
-            return this;
-        }
-
-        /**
-         * 设置需要显示的标题
-         *
-         * @param list 标题集合
-         * @return Build对象
-         */
-        public Build setBannerTitle(@Nullable List<String> list) {
-            this.bannerTitleList = list;
-            return this;
-        }
-
-        /**
-         * 实例化控件
-         *
-         * @return AutoScrollBanner对象
-         */
-        public AutoScrollBanner Builder() {
-            return new AutoScrollBanner(context, this);
-        }
     }
 }

@@ -3,7 +3,7 @@
 AutoScrollBannerView 是一种利用ViewPager+RadioGroup组合而成的自定义轮播图控件，该控件拥有多种自定义布局，用户可以根据自己的需求设计
 出自己想要的效果
 ### 效果：
-<img src="https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"/>
+![](https://github.com/kyuyi/AutoScrollBannerView/blob/master/material/gif5%E6%96%B0%E6%96%87%E4%BB%B6.gif)
 ### 如何使用：
 #### 目前只支持Gradle方式，配置方式如下：
 	dependencies {
